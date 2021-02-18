@@ -1,25 +1,38 @@
-import logo from './logo.svg';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React, { Component } from 'react'
+import axios from "axios";
+
+export default class App extends Component {
+  state = { todos: []};
+
+  async componentDidMount() {
+  
+  let  result = await axios.get("http://127.0.0.1:8000/cars/cars/");
+  console.log("fetched the data from the json placeholder api wooray using axios")
+  console.log(result);
+  }
+  render() {
+    return (
+      <div className="container">
+        <div className="spinner-border text-primary" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+        
+
+         {this.state.todos.length > 0 ? (
+           <div>{this.state.todos.length}</div>
+
+         ) : (
+          <div className="spinner-border text-primary" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+
+         )}
+      </div>
+    )
+  }
 }
 
-export default App;
+
