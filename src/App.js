@@ -11,6 +11,7 @@ export default class App extends Component {
   
   let  result = await axios.get("http://127.0.0.1:8000/cars/cars/");
   console.log("fetched the data from the json placeholder api wooray using axios")
+  this.setState({ todos: result.data})
   console.log(result);
   }
   render() {
@@ -22,7 +23,10 @@ export default class App extends Component {
         
 
          {this.state.todos.length > 0 ? (
-           <div>{this.state.todos.length}</div>
+           <div>{this.state.todos.map(car =>(
+             <h1>{car.model}</h1>,
+             <p>{car.year}</p>
+           ))}</div>
 
          ) : (
           <div className="spinner-border text-primary" role="status">
